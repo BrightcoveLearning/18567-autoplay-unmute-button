@@ -1,7 +1,7 @@
 <!-- BE SURE TO UPDATE NAME AND LINK TO DOC -->
 
 # 18567-autostart-unmute-button-iossafari
-For more information about this sample see: https://support.brightcove.com/brightcove-player-sample-autostart-unmute-button-iossafari.
+For more information about this sample see: https://support.brightcove.com/brightcove-player-sample-autoplay-unmute-button-iossafari.
 
 <p>The purpose and structure of files in this repo are:</p>
 
