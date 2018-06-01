@@ -2,8 +2,8 @@ videojs.registerPlugin('unmuteButton', function() {
   var myPlayer = this,
     volumeLevel = .5;
 
-  // +++ Check if in Safari or on iOS +++
-  if (videojs.browser.IS_IOS || videojs.browser.IS_SAFARI) {
+  // +++ Check if in Safari/Chrome or on iOS +++
+  if (videojs.browser.IS_IOS || videojs.browser.IS_SAFARI || videojs.browser.IS_CHROME) {
     // If true, go with the unmute button
     var button = document.createElement("button");
 
@@ -22,7 +22,7 @@ videojs.registerPlugin('unmuteButton', function() {
     // +++ Add the button to the container +++
     playerContainer.appendChild(button);
   } else {
-    // +++ If not iOS or Safari start the audio +++
+    // +++ If not iOS or Safari/Chrome start the audio +++
     myPlayer.on('loadstart', function(){
       myPlayer.muted(false);
       myPlayer.volume(volumeLevel);
