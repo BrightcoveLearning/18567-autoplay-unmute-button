@@ -2,30 +2,42 @@ videojs.registerPlugin('unmuteButton', function() {
   var myPlayer = this,
     volumeLevel = .5;
 
-  // +++ Check if in Safari/Chrome or on iOS +++
-  if (videojs.browser.IS_IOS || videojs.browser.IS_SAFARI || videojs.browser.IS_CHROME) {
-    // If true, go with the unmute button
-    var button = document.createElement("button");
+  // +++ Wait for loadedmetadata then try to play video +++
+  myPlayer.on('loadedmetadata', function() {
+    // Play video which returns a promise
+    var promise = myPlayer.play();
 
-    // +++ Add button's event listener +++
-    button.addEventListener("click", function() {
-      myPlayer.muted(false);
-      myPlayer.volume(volumeLevel);
-      playerContainer.removeChild(button);
-    });
+    // +++ Use promise to see if video is playing or not +++
+    if (promise !== undefined) {
+      promise.then(function() {
+        // Autoplay started!
+        // If video playing unmute and set the volume
+        myPlayer.muted(false);
+        myPlayer.volume(volumeLevel);
+      }).catch(function(error) {
+        // Autoplay was prevented.
+        // // +++ If autoplay prevented mute the video, play video and display unmute button +++
+        myPlayer.muted(true);
+        myPlayer.play();
 
-    // +++ Configure the button +++
-    button.textContent = "Unmute";
-    button.classList.add('inner');
-    button.setAttribute("style", "color:black; background-color:red; width:100px; height:50px; opacity: .4;");
+        var button = document.createElement("button");
 
-    // +++ Add the button to the container +++
-    playerContainer.appendChild(button);
-  } else {
-    // +++ If not iOS or Safari/Chrome start the audio +++
-    myPlayer.on('loadstart', function(){
-      myPlayer.muted(false);
-      myPlayer.volume(volumeLevel);
-    });
-  }
+        // +++ Add button's event listener +++
+        button.addEventListener("click", function() {
+          myPlayer.muted(false);
+          myPlayer.volume(volumeLevel);
+          playerContainer.removeChild(button);
+        });
+
+        // +++ Configure the button +++
+        button.textContent = "Unmute";
+        button.classList.add('inner');
+        button.setAttribute("style", "color:black; background-color:red; width:100px; height:50px; opacity: .4;");
+
+        // +++ Add the button to the container +++
+        playerContainer.appendChild(button);
+
+      });
+    }
+  });
 });
