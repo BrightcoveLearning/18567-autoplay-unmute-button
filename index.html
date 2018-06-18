@@ -52,7 +52,6 @@
       myPlayer.on('loadedmetadata',function() {
         // Play video which returns a promise
         var promise = myPlayer.play();
-        console.log('promise',promise);
 
         // +++ Use promise to see if video is playing or not +++
         if (promise !== undefined) {
@@ -63,7 +62,7 @@
             myPlayer.volume(volumeLevel);
           }).catch(function(error) {
             // Autoplay was prevented.
-            // // +++ If autoplay prevented mute the video, play video and display unmute button +++
+            // // +++ If autoplay prevented: mute the video, play video and display unmute button +++
             myPlayer.muted(true);
             myPlayer.play();
 
