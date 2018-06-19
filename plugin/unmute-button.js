@@ -16,7 +16,7 @@ videojs.registerPlugin('unmuteButton', function() {
         myPlayer.volume(volumeLevel);
       }).catch(function(error) {
         // Autoplay was prevented.
-        // // +++ If autoplay prevented mute the video, play video and display unmute button +++
+        // // +++ If autoplay prevented: mute the video, play video and display unmute button +++
         myPlayer.muted(true);
         myPlayer.play();
 
