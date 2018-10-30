@@ -10,7 +10,7 @@
 <body>
 
  <div id="playerContainer" class="outer">
-   <video  id="myPlayerID"
+   <video-js  id="myPlayerID"
      data-video-id="5755775186001"
      data-account="1752604059001"
      data-player="default"
@@ -18,15 +18,15 @@
      data-application-id
      class="video-js"
      controls
-     playsinline></video>
+     playsinline></video-js>
  </div>
 
- <script src="//players.brightcove.net/1752604059001/default_default/index.min.js"></script>
+ <script src="https://players.brightcove.net/1752604059001/default_default/index.min.js"></script>
 
   <script src="unmute-button.js"></script>
 
   <script type="text/javascript">
-    videojs('myPlayerID').ready(function() {
+    videojs.getPlayer('myPlayerID').ready(function() {
       var myPlayer = this;
       myPlayer.unmuteButton();
     });
